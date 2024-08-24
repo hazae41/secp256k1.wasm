@@ -1,3 +1,7 @@
-mod secp256k1;
+mod signature;
+mod signing_key;
+mod verifying_key;
 
-pub use secp256k1::*;
+pub use signature::*;
+pub use signing_key::*;
+pub use verifying_key::*;
