@@ -1,0 +1,24 @@
+{
+  "name": "secp256k1_wasm",
+  "type": "module",
+  "collaborators": [
+    "hazae41 <4405263+hazae41@users.noreply.github.com>"
+  ],
+  "description": "WebAssembly port of Secp256k1",
+  "version": "1.0.0",
+  "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hazae41/secp256k1.wasm"
+  },
+  "files": [
+    "secp256k1_wasm_bg.wasm",
+    "secp256k1_wasm.js",
+    "secp256k1_wasm.d.ts"
+  ],
+  "main": "secp256k1_wasm.js",
+  "types": "secp256k1_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
