@@ -26,12 +26,6 @@ impl Secp256k1SignatureAndRecovery {
 
     #[wasm_bindgen]
     pub fn from_bytes(input: &Memory) -> Result<Secp256k1SignatureAndRecovery, JsValue> {
-        let len = input.inner.len();
-
-        if len != 65 {
-            return Err(JsValue::from_str("Invalid length"));
-        }
-
         let sigres = k256::ecdsa::Signature::from_slice(&input.inner[..64]);
         let sigraw =
             sigres.map_err(|_| JsError::new("Secp256k1SignatureAndRecovery::from_bytes"))?;
