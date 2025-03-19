@@ -26,6 +26,16 @@ export class Memory {
 export class Secp256k1SignatureAndRecovery {
   [Symbol.dispose](): void;
 /**
+* @param {Memory} signature
+* @param {number} recovery
+*/
+  constructor(signature: Memory, recovery: number);
+/**
+* @param {Memory} input
+* @returns {Secp256k1SignatureAndRecovery}
+*/
+  static from_bytes(input: Memory): Secp256k1SignatureAndRecovery;
+/**
 * @returns {Memory}
 */
   to_bytes(): Memory;
@@ -90,12 +100,9 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly __wbg_secp256k1signatureandrecovery_free: (a: number, b: number) => void;
+  readonly secp256k1signatureandrecovery_new: (a: number, b: number, c: number) => void;
+  readonly secp256k1signatureandrecovery_from_bytes: (a: number, b: number) => void;
   readonly secp256k1signatureandrecovery_to_bytes: (a: number) => number;
-  readonly __wbg_secp256k1verifyingkey_free: (a: number, b: number) => void;
-  readonly secp256k1verifyingkey_from_sec1_bytes: (a: number, b: number) => void;
-  readonly secp256k1verifyingkey_recover_from_prehash: (a: number, b: number, c: number) => void;
-  readonly secp256k1verifyingkey_to_sec1_compressed_bytes: (a: number) => number;
-  readonly secp256k1verifyingkey_to_sec1_uncompressed_bytes: (a: number) => number;
   readonly __wbg_secp256k1signingkey_free: (a: number, b: number) => void;
   readonly secp256k1signingkey_new: () => number;
   readonly secp256k1signingkey_from_bytes: (a: number, b: number) => void;
@@ -103,6 +110,11 @@ export interface InitOutput {
   readonly secp256k1signingkey_verifying_key: (a: number) => number;
   readonly secp256k1signingkey_sign_prehash_recoverable: (a: number, b: number, c: number) => void;
   readonly secp256k1signingkey_random: () => number;
+  readonly __wbg_secp256k1verifyingkey_free: (a: number, b: number) => void;
+  readonly secp256k1verifyingkey_from_sec1_bytes: (a: number, b: number) => void;
+  readonly secp256k1verifyingkey_recover_from_prehash: (a: number, b: number, c: number) => void;
+  readonly secp256k1verifyingkey_to_sec1_compressed_bytes: (a: number) => number;
+  readonly secp256k1verifyingkey_to_sec1_uncompressed_bytes: (a: number) => number;
   readonly __wbg_memory_free: (a: number, b: number) => void;
   readonly memory_new: (a: number, b: number) => number;
   readonly memory_ptr: (a: number) => number;
