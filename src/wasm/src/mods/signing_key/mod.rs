@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
 
+use crate::rjse;
 use crate::Secp256k1SignatureAndRecovery;
 use crate::Secp256k1VerifyingKey;
 
@@ -29,8 +30,7 @@ impl Secp256k1SigningKey {
         use k256::elliptic_curve::generic_array::GenericArray;
 
         let array = GenericArray::from_slice(&input.inner);
-        let result = k256::ecdsa::SigningKey::from_bytes(array);
-        let inner = result.map_err(|_| JsError::new("SigningKey::from_bytes"))?;
+        let inner = rjse!(k256::ecdsa::SigningKey::from_bytes(array))?;
 
         Ok(Self { inner })
     }
@@ -48,19 +48,9 @@ impl Secp256k1SigningKey {
     }
 
     #[wasm_bindgen]
-    pub fn sign_prehash_recoverable(
-        &self,
-        hashed: &Memory,
-    ) -> Result<Secp256k1SignatureAndRecovery, JsError> {
-        let rsign = self.inner.sign_prehash_recoverable(&hashed.inner);
-        let tuple = rsign.map_err(|_| JsError::new("SigningKey::sign_prehash_recoverable"))?;
-        let (signature0, recovery) = tuple;
+    pub fn sign_prehash_recoverable(&self, hashed: &Memory) -> Result<Secp256k1SignatureAndRecovery, JsError> {
+        let (signature, recovery) = rjse!(self.inner.sign_prehash_recoverable(&hashed.inner))?;
 
-        let signature = signature0.normalize_s().unwrap_or(signature0);
-
-        Ok(Secp256k1SignatureAndRecovery {
-            signature,
-            recovery,
-        })
+        Ok(Secp256k1SignatureAndRecovery { signature, recovery })
     }
 }

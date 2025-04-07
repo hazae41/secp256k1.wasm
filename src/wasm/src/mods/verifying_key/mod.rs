@@ -1,6 +1,6 @@
 use wasm_bindgen::prelude::*;
 
-use crate::Secp256k1SignatureAndRecovery;
+use crate::{rjse, Secp256k1SignatureAndRecovery};
 
 use memory_wasm::Memory;
 
@@ -13,24 +13,14 @@ pub struct Secp256k1VerifyingKey {
 impl Secp256k1VerifyingKey {
     #[wasm_bindgen]
     pub fn from_sec1_bytes(input: &Memory) -> Result<Secp256k1VerifyingKey, JsError> {
-        let result = k256::ecdsa::VerifyingKey::from_sec1_bytes(&input.inner);
-        let inner = result.map_err(|_| JsError::new("Secp256k1VerifyingKey::from_sec1_bytes"))?;
+        let inner = rjse!(k256::ecdsa::VerifyingKey::from_sec1_bytes(&input.inner))?;
 
         Ok(Self { inner })
     }
 
     #[wasm_bindgen]
-    pub fn recover_from_prehash(
-        hashed: &Memory,
-        signature: &Secp256k1SignatureAndRecovery,
-    ) -> Result<Secp256k1VerifyingKey, JsError> {
-        let result = k256::ecdsa::VerifyingKey::recover_from_prehash(
-            &hashed.inner,
-            &signature.signature,
-            signature.recovery,
-        );
-        let inner =
-            result.map_err(|_| JsError::new("Secp256k1VerifyingKey::recover_from_prehash"))?;
+    pub fn recover_from_prehash(hashed: &Memory, signature: &Secp256k1SignatureAndRecovery) -> Result<Secp256k1VerifyingKey, JsError> {
+        let inner = rjse!(k256::ecdsa::VerifyingKey::recover_from_prehash(&hashed.inner, &signature.signature, signature.recovery))?;
 
         Ok(Secp256k1VerifyingKey { inner })
     }
