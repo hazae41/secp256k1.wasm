@@ -1,7 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/**
-*/
 export class Memory {
   [Symbol.dispose](): void;
 /**
@@ -21,77 +19,27 @@ export class Memory {
 */
   get bytes(): Uint8Array;
 }
-/**
-*/
 export class Secp256k1SignatureAndRecovery {
   [Symbol.dispose](): void;
-/**
-* @param {Memory} signature
-* @param {number} recovery
-*/
   constructor(signature: Memory, recovery: number);
-/**
-* @param {Memory} input
-* @returns {Secp256k1SignatureAndRecovery}
-*/
   static from_bytes(input: Memory): Secp256k1SignatureAndRecovery;
-/**
-* @returns {Memory}
-*/
   to_bytes(): Memory;
 }
-/**
-*/
 export class Secp256k1SigningKey {
   [Symbol.dispose](): void;
-/**
-*/
   constructor();
-/**
-* @returns {Secp256k1SigningKey}
-*/
   static random(): Secp256k1SigningKey;
-/**
-* @param {Memory} input
-* @returns {Secp256k1SigningKey}
-*/
   static from_bytes(input: Memory): Secp256k1SigningKey;
-/**
-* @returns {Memory}
-*/
   to_bytes(): Memory;
-/**
-* @returns {Secp256k1VerifyingKey}
-*/
   verifying_key(): Secp256k1VerifyingKey;
-/**
-* @param {Memory} hashed
-* @returns {Secp256k1SignatureAndRecovery}
-*/
   sign_prehash_recoverable(hashed: Memory): Secp256k1SignatureAndRecovery;
 }
-/**
-*/
 export class Secp256k1VerifyingKey {
+  private constructor();
   [Symbol.dispose](): void;
-/**
-* @param {Memory} input
-* @returns {Secp256k1VerifyingKey}
-*/
   static from_sec1_bytes(input: Memory): Secp256k1VerifyingKey;
-/**
-* @param {Memory} hashed
-* @param {Secp256k1SignatureAndRecovery} signature
-* @returns {Secp256k1VerifyingKey}
-*/
   static recover_from_prehash(hashed: Memory, signature: Secp256k1SignatureAndRecovery): Secp256k1VerifyingKey;
-/**
-* @returns {Memory}
-*/
   to_sec1_compressed_bytes(): Memory;
-/**
-* @returns {Memory}
-*/
   to_sec1_uncompressed_bytes(): Memory;
 }
 
@@ -99,29 +47,32 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly __wbg_secp256k1signatureandrecovery_free: (a: number, b: number) => void;
-  readonly secp256k1signatureandrecovery_new: (a: number, b: number, c: number) => void;
-  readonly secp256k1signatureandrecovery_from_bytes: (a: number, b: number) => void;
-  readonly secp256k1signatureandrecovery_to_bytes: (a: number) => number;
-  readonly __wbg_secp256k1signingkey_free: (a: number, b: number) => void;
-  readonly secp256k1signingkey_new: () => number;
-  readonly secp256k1signingkey_from_bytes: (a: number, b: number) => void;
-  readonly secp256k1signingkey_to_bytes: (a: number) => number;
-  readonly secp256k1signingkey_verifying_key: (a: number) => number;
-  readonly secp256k1signingkey_sign_prehash_recoverable: (a: number, b: number, c: number) => void;
-  readonly secp256k1signingkey_random: () => number;
   readonly __wbg_secp256k1verifyingkey_free: (a: number, b: number) => void;
-  readonly secp256k1verifyingkey_from_sec1_bytes: (a: number, b: number) => void;
-  readonly secp256k1verifyingkey_recover_from_prehash: (a: number, b: number, c: number) => void;
+  readonly secp256k1verifyingkey_from_sec1_bytes: (a: number) => [number, number, number];
+  readonly secp256k1verifyingkey_recover_from_prehash: (a: number, b: number) => [number, number, number];
   readonly secp256k1verifyingkey_to_sec1_compressed_bytes: (a: number) => number;
   readonly secp256k1verifyingkey_to_sec1_uncompressed_bytes: (a: number) => number;
+  readonly __wbg_secp256k1signingkey_free: (a: number, b: number) => void;
+  readonly secp256k1signingkey_new: () => number;
+  readonly secp256k1signingkey_from_bytes: (a: number) => [number, number, number];
+  readonly secp256k1signingkey_to_bytes: (a: number) => number;
+  readonly secp256k1signingkey_verifying_key: (a: number) => number;
+  readonly secp256k1signingkey_sign_prehash_recoverable: (a: number, b: number) => [number, number, number];
+  readonly secp256k1signingkey_random: () => number;
+  readonly __wbg_secp256k1signatureandrecovery_free: (a: number, b: number) => void;
+  readonly secp256k1signatureandrecovery_new: (a: number, b: number) => [number, number, number];
+  readonly secp256k1signatureandrecovery_from_bytes: (a: number) => [number, number, number];
+  readonly secp256k1signatureandrecovery_to_bytes: (a: number) => number;
   readonly __wbg_memory_free: (a: number, b: number) => void;
   readonly memory_new: (a: number, b: number) => number;
   readonly memory_ptr: (a: number) => number;
   readonly memory_len: (a: number) => number;
-  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_exn_store: (a: number) => void;
+  readonly __externref_table_alloc: () => number;
+  readonly __wbindgen_export_2: WebAssembly.Table;
+  readonly __externref_table_dealloc: (a: number) => void;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
+  readonly __wbindgen_start: () => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;
