@@ -1,6 +1,7 @@
 use wasm_bindgen::prelude::*;
 
-use crate::rjse;
+use crate::libs::jse::rjse;
+
 use crate::Secp256k1SignatureAndRecovery;
 use crate::Secp256k1VerifyingKey;
 

@@ -2,7 +2,7 @@ use wasm_bindgen::prelude::*;
 
 use memory_wasm::Memory;
 
-use crate::{ojse, rjse};
+use crate::libs::jse::{ojse, rjse};
 
 #[wasm_bindgen]
 pub struct Secp256k1SignatureAndRecovery {
