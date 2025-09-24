@@ -14,7 +14,8 @@
   "files": [
     "secp256k1_wasm_bg.wasm",
     "secp256k1_wasm.js",
-    "secp256k1_wasm.d.ts"
+    "secp256k1_wasm.d.ts",
+    "LICENSE.md"
   ],
   "main": "secp256k1_wasm.js",
   "types": "secp256k1_wasm.d.ts",

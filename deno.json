@@ -1,0 +1,17 @@
+{
+  "name": "@hazae41/secp256k1-wasm",
+  "version": "1.0.18",
+  "imports": {
+    "@/": "./src/"
+  },
+  "exports": {
+    ".": "./src/node/mod.ts"
+  },
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-namespace"
+      ]
+    }
+  }
+}

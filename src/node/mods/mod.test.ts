@@ -1,5 +1,6 @@
 import { assert, test } from "@hazae41/phobos";
-import { Memory, Secp256k1SigningKey, Secp256k1VerifyingKey, initBundled } from "./index.js";
+import { Buffer } from "node:buffer";
+import { Memory, Secp256k1SigningKey, Secp256k1VerifyingKey, initBundled } from "./mod.js";
 
 function equals(a: Uint8Array, b: Uint8Array) {
   const ba = Buffer.from(a)
