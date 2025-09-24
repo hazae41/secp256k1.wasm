@@ -3,10 +3,14 @@
 WebAssembly port of Secp256k1
 
 ```bash
-npm i @hazae41/secp256k1.wasm
+npm install @hazae41/secp256k1.wasm
 ```
 
-[**Node Package 📦**](https://www.npmjs.com/package/@hazae41/secp256k1.wasm)
+```bash
+deno install jsr:@hazae41/secp256k1-wasm
+```
+
+[**📦 NPM**](https://www.npmjs.com/package/@hazae41/secp256k1.wasm) • [**📦 JSR**](https://jsr.io/@hazae41/secp256k1-wasm)
 
 ## Features
 - Reproducible building
@@ -45,28 +49,12 @@ using identity2 = Secp256k1VerifyingKey.recover_from_prehash(hash, signaturex)
 
 ## Building
 
-### Unreproducible building
-
-You need to install [Rust](https://www.rust-lang.org/tools/install)
-
-Then, install [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
-
-```bash
-cargo install wasm-pack
-```
-
-Finally, do a clean install and build
-
-```bash
-npm ci && npm run build
-```
-
 ### Reproducible building
 
 You can build the exact same bytecode using Docker, just be sure you're on a `linux/amd64` host
 
 ```bash
-docker compose up --build
+npm run compile
 ```
 
 Then check that all the files are the same using `npm diff`
@@ -75,7 +63,7 @@ Then check that all the files are the same using `npm diff`
 npm diff
 ```
 
-If the output is empty then the bytecode is the same as the one I commited
+If the output is empty then the bytecode is the same as the one I published on NPM.
 
 ### Automated checks
 
