@@ -3,8 +3,7 @@
   "version": "1.0.21",
   "vendor": true,
   "imports": {
-    "@/": "./src/",
-    "@hazae41/memory-wasm": "jsr:@hazae41/memory-wasm@^1.0.37"
+    "@/": "./src/"
   },
   "exports": {
     ".": "./src/node/mod.ts"
