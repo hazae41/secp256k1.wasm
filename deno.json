@@ -1,8 +1,10 @@
 {
   "name": "@hazae41/secp256k1-wasm",
   "version": "1.0.20",
+  "vendor": true,
   "imports": {
-    "@/": "./src/"
+    "@/": "./src/",
+    "@hazae41/memory-wasm": "jsr:@hazae41/memory-wasm@^1.0.37"
   },
   "exports": {
     ".": "./src/node/mod.ts"
