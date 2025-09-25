@@ -1,16 +1,10 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@hazae41/memory-wasm@^1.0.43": "1.0.43",
     "npm:@hazae41/phobos@^2.0.6": "2.0.6",
     "npm:@hazae41/tscousin@^1.0.17": "1.0.17",
     "npm:@types/node@^24.5.2": "24.5.2",
     "npm:typescript@^5.9.2": "5.9.2"
-  },
-  "jsr": {
-    "@hazae41/memory-wasm@1.0.43": {
-      "integrity": "0b882ca26ad09d7591cfe03c982152bb83b5c3db8355415b469c50cbd7649ac0"
-    }
   },
   "npm": {
     "@hazae41/phobos@2.0.6": {
@@ -35,9 +29,6 @@
     }
   },
   "workspace": {
-    "dependencies": [
-      "jsr:@hazae41/memory-wasm@^1.0.43"
-    ],
     "packageJson": {
       "dependencies": [
         "npm:@hazae41/phobos@^2.0.6",
