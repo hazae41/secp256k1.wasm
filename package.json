@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "@hazae41/secp256k1.wasm",
+  "name": "@hazae41/secp256k1-wasm",
   "version": "1.0.21",
   "description": "WebAssembly port of Secp256k1",
   "repository": "github:hazae41/secp256k1.wasm",

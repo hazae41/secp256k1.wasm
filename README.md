@@ -3,14 +3,14 @@
 WebAssembly port of Secp256k1
 
 ```bash
-npm install @hazae41/secp256k1.wasm
+npm install @hazae41/secp256k1-wasm
 ```
 
 ```bash
 deno install jsr:@hazae41/secp256k1-wasm
 ```
 
-[**📦 NPM**](https://www.npmjs.com/package/@hazae41/secp256k1.wasm) • [**📦 JSR**](https://jsr.io/@hazae41/secp256k1-wasm)
+[**📦 NPM**](https://www.npmjs.com/package/@hazae41/secp256k1-wasm) • [**📦 JSR**](https://jsr.io/@hazae41/secp256k1-wasm)
 
 ## Features
 - Reproducible building
@@ -26,7 +26,7 @@ deno install jsr:@hazae41/secp256k1-wasm
 ## Usage
 
 ```typescript
-import { Secp256k1Wasm, Memory, Secp256k1SigningKey, Secp256k1VerifyingKey } from "@hazae41/secp256k1.wasm";
+import { Secp256k1Wasm, Memory, Secp256k1SigningKey, Secp256k1VerifyingKey } from "@hazae41/secp256k1-wasm";
 
 // Wait for WASM to load
 await Secp256k1Wasm.initBundled();
