@@ -26,14 +26,14 @@ deno install jsr:@hazae41/secp256k1-wasm
 ## Usage
 
 ```typescript
-import { Secp256k1Wasm, Memory, Secp256k1SigningKey, Secp256k1VerifyingKey } from "@hazae41/secp256k1-wasm";
+import { secp256k1Wasm } from "@hazae41/secp256k1-wasm";
 
 // Wait for WASM to load
-await Secp256k1Wasm.initBundled();
+await secp256k1Wasm.initBundled();
 
-using hash = new Memory(crypto.getRandomValues(new Uint8Array(32)))
+using hash = new secp256k1Wasm.Memory(crypto.getRandomValues(new Uint8Array(32)))
 
-using keypair = new Secp256k1SigningKey()
+using keypair = new secp256k1Wasm.Secp256k1SigningKey()
 using identity = keypair.verifying_key()
 
 using signaturex = keypair.sign_prehash_recoverable(hash)
@@ -44,7 +44,7 @@ const r = signatureb.subarray(0, 32)
 const s = signatureb.subarray(32, 64)
 const v = signatureb[64]
 
-using identity2 = Secp256k1VerifyingKey.recover_from_prehash(hash, signaturex)
+using identity2 = secp256k1Wasm.Secp256k1VerifyingKey.recover_from_prehash(hash, signaturex)
 ```
 
 ## Building
