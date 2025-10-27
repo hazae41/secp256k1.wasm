@@ -1,6 +1,6 @@
 import { assert, test } from "@hazae41/phobos";
 import { Buffer } from "node:buffer";
-import { Memory, Secp256k1SigningKey, Secp256k1VerifyingKey, initBundled } from "./mod.ts";
+import { Memory, Secp256k1SigningKey, Secp256k1VerifyingKey, load } from "./mod.ts";
 
 function equals(a: Uint8Array, b: Uint8Array) {
   const ba = Buffer.from(a)
@@ -10,7 +10,7 @@ function equals(a: Uint8Array, b: Uint8Array) {
 }
 
 test("sign", async () => {
-  await initBundled()
+  await load()
 
   using hash = new Memory(crypto.getRandomValues(new Uint8Array(32)))
 
