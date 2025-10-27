@@ -58,7 +58,7 @@ function passArray8ToWasm0(arg, malloc) {
     return ptr;
 }
 
-const MemoryFinalization = true
+const MemoryFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_memory_free(ptr >>> 0, 1));
 
@@ -68,7 +68,7 @@ export class Memory {
         ptr = ptr >>> 0;
         const obj = Object.create(Memory.prototype);
         obj.__wbg_ptr = ptr;
-        MemoryFinalization;
+        MemoryFinalization.register(obj, obj.__wbg_ptr, obj);
         return obj;
     }
 
@@ -77,7 +77,7 @@ export class Memory {
         this.__wbg_ptr = 0;
         this.__wbg_ptr0 = 0;
         this.__wbg_len0 = 0;
-        MemoryFinalization;
+        MemoryFinalization.unregister(this);
         return ptr;
     }
 
@@ -95,7 +95,7 @@ export class Memory {
         this.__wbg_ptr = ret >>> 0;
         this.__wbg_ptr0 = ptr0 >>> 0;
         this.__wbg_len0 = len0 >>> 0;
-        MemoryFinalization;
+        MemoryFinalization.register(this, this.__wbg_ptr, this);
         return this;
     }
     /**
@@ -132,7 +132,7 @@ export class Memory {
     }
 }
 
-const Secp256k1SignatureAndRecoveryFinalization = true
+const Secp256k1SignatureAndRecoveryFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_secp256k1signatureandrecovery_free(ptr >>> 0, 1));
 
@@ -142,14 +142,14 @@ export class Secp256k1SignatureAndRecovery {
         ptr = ptr >>> 0;
         const obj = Object.create(Secp256k1SignatureAndRecovery.prototype);
         obj.__wbg_ptr = ptr;
-        Secp256k1SignatureAndRecoveryFinalization;
+        Secp256k1SignatureAndRecoveryFinalization.register(obj, obj.__wbg_ptr, obj);
         return obj;
     }
 
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
         this.__wbg_ptr = 0;
-        Secp256k1SignatureAndRecoveryFinalization;
+        Secp256k1SignatureAndRecoveryFinalization.unregister(this);
         return ptr;
     }
 
@@ -168,7 +168,7 @@ export class Secp256k1SignatureAndRecovery {
             throw takeFromExternrefTable0(ret[1]);
         }
         this.__wbg_ptr = ret[0] >>> 0;
-        Secp256k1SignatureAndRecoveryFinalization;
+        Secp256k1SignatureAndRecoveryFinalization.register(this, this.__wbg_ptr, this);
         return this;
     }
     /**
@@ -192,7 +192,7 @@ export class Secp256k1SignatureAndRecovery {
     }
 }
 
-const Secp256k1SigningKeyFinalization = true
+const Secp256k1SigningKeyFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_secp256k1signingkey_free(ptr >>> 0, 1));
 
@@ -202,14 +202,14 @@ export class Secp256k1SigningKey {
         ptr = ptr >>> 0;
         const obj = Object.create(Secp256k1SigningKey.prototype);
         obj.__wbg_ptr = ptr;
-        Secp256k1SigningKeyFinalization;
+        Secp256k1SigningKeyFinalization.register(obj, obj.__wbg_ptr, obj);
         return obj;
     }
 
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
         this.__wbg_ptr = 0;
-        Secp256k1SigningKeyFinalization;
+        Secp256k1SigningKeyFinalization.unregister(this);
         return ptr;
     }
 
@@ -220,7 +220,7 @@ export class Secp256k1SigningKey {
     constructor() {
         const ret = wasm.secp256k1signingkey_new();
         this.__wbg_ptr = ret >>> 0;
-        Secp256k1SigningKeyFinalization;
+        Secp256k1SigningKeyFinalization.register(this, this.__wbg_ptr, this);
         return this;
     }
     /**
@@ -270,7 +270,7 @@ export class Secp256k1SigningKey {
     }
 }
 
-const Secp256k1VerifyingKeyFinalization = true
+const Secp256k1VerifyingKeyFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_secp256k1verifyingkey_free(ptr >>> 0, 1));
 
@@ -280,14 +280,14 @@ export class Secp256k1VerifyingKey {
         ptr = ptr >>> 0;
         const obj = Object.create(Secp256k1VerifyingKey.prototype);
         obj.__wbg_ptr = ptr;
-        Secp256k1VerifyingKeyFinalization;
+        Secp256k1VerifyingKeyFinalization.register(obj, obj.__wbg_ptr, obj);
         return obj;
     }
 
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
         this.__wbg_ptr = 0;
-        Secp256k1VerifyingKeyFinalization;
+        Secp256k1VerifyingKeyFinalization.unregister(this);
         return ptr;
     }
 
