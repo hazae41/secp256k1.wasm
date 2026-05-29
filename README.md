@@ -6,11 +6,7 @@ WebAssembly port of Secp256k1
 npm install @hazae41/secp256k1-wasm
 ```
 
-```bash
-deno install jsr:@hazae41/secp256k1-wasm
-```
-
-[**📦 NPM**](https://www.npmjs.com/package/@hazae41/secp256k1-wasm) • [**📦 JSR**](https://jsr.io/@hazae41/secp256k1-wasm)
+[**📦 NPM**](https://www.npmjs.com/package/@hazae41/secp256k1-wasm)
 
 ## Features
 - Reproducible building
@@ -29,7 +25,7 @@ deno install jsr:@hazae41/secp256k1-wasm
 import { secp256k1Wasm } from "@hazae41/secp256k1-wasm";
 
 // Wait for WASM to load
-await secp256k1Wasm.initBundled();
+await secp256k1Wasm.load();
 
 using hash = new secp256k1Wasm.Memory(crypto.getRandomValues(new Uint8Array(32)))
 
@@ -54,7 +50,7 @@ using identity2 = secp256k1Wasm.Secp256k1VerifyingKey.recover_from_prehash(hash,
 You can build the exact same bytecode using Docker
 
 ```bash
-npm run compile
+npm run compile && npm run prepack
 ```
 
 Then check that all the files are the same using `npm diff`

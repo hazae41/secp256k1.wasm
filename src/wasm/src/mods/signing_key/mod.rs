@@ -27,6 +27,7 @@ impl Secp256k1SigningKey {
     }
 
     #[wasm_bindgen]
+    #[allow(deprecated)]
     pub fn from_bytes(input: &Memory) -> Result<Secp256k1SigningKey, JsError> {
         use k256::elliptic_curve::generic_array::GenericArray;
 

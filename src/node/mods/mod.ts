@@ -1,10 +1,8 @@
-export * from "../../wasm/pkg/secp256k1_wasm.js";
+export * from "../../wasm/out/daemon.js";
 
-/* @ts-types="../../wasm/pkg/secp256k1_wasm.d.ts" */
-import init, {
-  initSync, type InitOutput
-} from "../../wasm/pkg/secp256k1_wasm.js";
-import { data } from "../../wasm/pkg/secp256k1_wasm.wasm.js";
+/* @ts-types="../../wasm/out/daemon.d.ts" */
+import init, { initSync, type InitOutput } from "../../wasm/out/daemon.js";
+import { data } from "../../wasm/out/daemon.wasm.js";
 
 export async function load(): Promise<InitOutput> {
   return await init({ module_or_path: data })
