@@ -3,7 +3,7 @@
 WebAssembly port of Secp256k1
 
 ```bash
-npm install @hazae41/secp256k1-wasm
+npm install --save-peer @hazae41/secp256k1-wasm
 ```
 
 [**📦 NPM**](https://www.npmjs.com/package/@hazae41/secp256k1-wasm)
