@@ -47,7 +47,7 @@ using identity2 = secp256k1Wasm.Secp256k1VerifyingKey.recover_from_prehash(hash,
 
 ### Reproducible building
 
-You can build the exact same bytecode using Docker
+You can build the exact same bytecode
 
 ```bash
 npm run compile && npm run prepack
