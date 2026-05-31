@@ -30,6 +30,11 @@ impl Secp256k1VerifyingKey {
     }
 
     #[wasm_bindgen]
+    pub fn from_point(point: &Secp256k1ProjectivePoint) -> Result<Secp256k1VerifyingKey, JsError> {
+        Ok(Secp256k1VerifyingKey { inner: rjse!(k256::ecdsa::VerifyingKey::from_affine(point.inner.to_affine()))? })
+    }
+
+    #[wasm_bindgen]
     pub fn to_sec1_compressed_bytes(&self) -> Memory {
         Memory::new(self.inner.to_encoded_point(true).to_bytes().to_vec())
     }
