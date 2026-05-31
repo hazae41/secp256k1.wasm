@@ -14,6 +14,11 @@ pub struct Secp256k1SigningKey {
 
 #[wasm_bindgen]
 impl Secp256k1SigningKey {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> Self {
+        Self { inner: k256::ecdsa::SigningKey::random(&mut rand_core::OsRng {}) }
+    }
+
     #[wasm_bindgen]
     pub fn from_bytes(input: &Memory) -> Result<Secp256k1SigningKey, JsError> {
         Ok(Self { inner: rjse!(k256::ecdsa::SigningKey::from_slice(&input.inner))? })
