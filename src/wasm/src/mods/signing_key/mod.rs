@@ -14,27 +14,9 @@ pub struct Secp256k1SigningKey {
 
 #[wasm_bindgen]
 impl Secp256k1SigningKey {
-    #[wasm_bindgen(constructor)]
-    pub fn new() -> Self {
-        Self::random()
-    }
-
     #[wasm_bindgen]
-    pub fn random() -> Self {
-        let inner = k256::ecdsa::SigningKey::random(&mut rand_core::OsRng {});
-
-        Self { inner }
-    }
-
-    #[wasm_bindgen]
-    #[allow(deprecated)]
     pub fn from_bytes(input: &Memory) -> Result<Secp256k1SigningKey, JsError> {
-        use k256::elliptic_curve::generic_array::GenericArray;
-
-        let array = GenericArray::from_slice(&input.inner);
-        let inner = rjse!(k256::ecdsa::SigningKey::from_bytes(array))?;
-
-        Ok(Self { inner })
+        Ok(Self { inner: rjse!(k256::ecdsa::SigningKey::from_slice(&input.inner))? })
     }
 
     #[wasm_bindgen]
@@ -43,16 +25,14 @@ impl Secp256k1SigningKey {
     }
 
     #[wasm_bindgen]
-    pub fn verifying_key(&self) -> Secp256k1VerifyingKey {
-        let inner = self.inner.verifying_key().clone();
-
-        Secp256k1VerifyingKey { inner }
+    pub fn publish(&self) -> Secp256k1VerifyingKey {
+        Secp256k1VerifyingKey { inner: self.inner.verifying_key().clone() }
     }
 
     #[wasm_bindgen]
     pub fn sign_prehash_recoverable(&self, hashed: &Memory) -> Result<Secp256k1SignatureAndRecovery, JsError> {
-        let (signature, recovery) = rjse!(self.inner.sign_prehash_recoverable(&hashed.inner))?;
+        let (inner, recid) = rjse!(self.inner.sign_prehash_recoverable(&hashed.inner))?;
 
-        Ok(Secp256k1SignatureAndRecovery { signature, recovery })
+        Ok(Secp256k1SignatureAndRecovery { inner, recid })
     }
 }

@@ -1,8 +1,9 @@
 use wasm_bindgen::prelude::*;
 
-use crate::Secp256k1SignatureAndRecovery;
-
+use crate::libs::jse::ojse;
 use crate::libs::jse::rjse;
+
+use crate::{Secp256k1ProjectivePoint, Secp256k1SignatureAndRecovery};
 
 use memory_wasm::Memory;
 
@@ -15,25 +16,26 @@ pub struct Secp256k1VerifyingKey {
 impl Secp256k1VerifyingKey {
     #[wasm_bindgen]
     pub fn from_sec1_bytes(input: &Memory) -> Result<Secp256k1VerifyingKey, JsError> {
-        let inner = rjse!(k256::ecdsa::VerifyingKey::from_sec1_bytes(&input.inner))?;
-
-        Ok(Self { inner })
+        Ok(Self { inner: rjse!(k256::ecdsa::VerifyingKey::from_sec1_bytes(&input.inner))? })
     }
 
     #[wasm_bindgen]
     pub fn recover_from_prehash(hashed: &Memory, signature: &Secp256k1SignatureAndRecovery) -> Result<Secp256k1VerifyingKey, JsError> {
-        let inner = rjse!(k256::ecdsa::VerifyingKey::recover_from_prehash(&hashed.inner, &signature.signature, signature.recovery))?;
+        Ok(Secp256k1VerifyingKey { inner: rjse!(k256::ecdsa::VerifyingKey::recover_from_prehash(&hashed.inner, &signature.inner, signature.recid))? })
+    }
 
-        Ok(Secp256k1VerifyingKey { inner })
+    #[wasm_bindgen]
+    pub fn to_point(&self) -> Result<Secp256k1ProjectivePoint, JsError> {
+        Ok(Secp256k1ProjectivePoint { inner: k256::ProjectivePoint::from(self.inner.as_affine()) })
     }
 
     #[wasm_bindgen]
     pub fn to_sec1_compressed_bytes(&self) -> Memory {
-        Memory::new(self.inner.to_encoded_point(true).to_bytes().into())
+        Memory::new(self.inner.to_encoded_point(true).to_bytes().to_vec())
     }
 
     #[wasm_bindgen]
     pub fn to_sec1_uncompressed_bytes(&self) -> Memory {
-        Memory::new(self.inner.to_encoded_point(false).to_bytes().into())
+        Memory::new(self.inner.to_encoded_point(false).to_bytes().to_vec())
     }
 }
