@@ -2,7 +2,7 @@ use wasm_bindgen::prelude::*;
 
 use crate::libs::jse::rjse;
 
-use crate::Secp256k1ProjectivePoint;
+use crate::Secp256k1Point;
 use crate::Secp256k1SignatureAndRecovery;
 
 use memory_wasm::Memory;
@@ -15,7 +15,7 @@ pub struct Secp256k1VerifyingKey {
 #[wasm_bindgen]
 impl Secp256k1VerifyingKey {
     #[wasm_bindgen]
-    pub fn from_point(point: &Secp256k1ProjectivePoint) -> Result<Secp256k1VerifyingKey, JsError> {
+    pub fn from_point(point: &Secp256k1Point) -> Result<Secp256k1VerifyingKey, JsError> {
         Ok(Secp256k1VerifyingKey { inner: rjse!(k256::ecdsa::VerifyingKey::from_affine(point.inner.to_affine()))? })
     }
 
@@ -30,8 +30,8 @@ impl Secp256k1VerifyingKey {
     }
 
     #[wasm_bindgen]
-    pub fn to_point(&self) -> Result<Secp256k1ProjectivePoint, JsError> {
-        Ok(Secp256k1ProjectivePoint { inner: k256::ProjectivePoint::from(self.inner.as_affine()) })
+    pub fn to_point(&self) -> Result<Secp256k1Point, JsError> {
+        Ok(Secp256k1Point { inner: k256::ProjectivePoint::from(self.inner.as_affine()) })
     }
 
     #[wasm_bindgen]
