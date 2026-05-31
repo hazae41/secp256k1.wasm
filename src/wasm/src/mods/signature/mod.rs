@@ -13,14 +13,6 @@ pub struct Secp256k1SignatureAndRecovery {
 
 #[wasm_bindgen]
 impl Secp256k1SignatureAndRecovery {
-    #[wasm_bindgen(constructor)]
-    pub fn new(signature: &Memory, recovery: u8) -> Result<Secp256k1SignatureAndRecovery, JsValue> {
-        let inner = rjse!(k256::ecdsa::Signature::from_slice(&signature.inner))?;
-        let recid = ojse!(k256::ecdsa::RecoveryId::from_byte(recovery))?;
-
-        Ok(Self { inner, recid })
-    }
-
     #[wasm_bindgen]
     pub fn from_rsv_bytes(input: &Memory) -> Result<Secp256k1SignatureAndRecovery, JsValue> {
         let inner = rjse!(k256::ecdsa::Signature::from_slice(&input.inner[..64]))?;
