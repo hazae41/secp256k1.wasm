@@ -1,6 +1,5 @@
 use wasm_bindgen::prelude::*;
 
-use crate::libs::jse::ojse;
 use crate::libs::jse::rjse;
 
 use crate::{Secp256k1ProjectivePoint, Secp256k1SignatureAndRecovery};
