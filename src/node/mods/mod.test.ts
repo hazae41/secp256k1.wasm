@@ -14,11 +14,11 @@ test("sign", async () => {
 
   using hash = new Memory(crypto.getRandomValues(new Uint8Array(32)))
 
-  using keypair = new Secp256k1SigningKey()
-  using identity = keypair.verifying_key()
+  using keypair = Secp256k1SigningKey.from_bytes(new Memory(crypto.getRandomValues(new Uint8Array(32))))
+  using identity = keypair.publish()
 
   using signaturex = keypair.sign_prehash_recoverable(hash)
-  using signaturem = signaturex.to_bytes()
+  using signaturem = signaturex.to_rsv_bytes()
   const signatureb = signaturem.bytes
 
   const r = signatureb.subarray(0, 32)
