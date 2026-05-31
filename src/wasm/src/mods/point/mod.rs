@@ -1,9 +1,9 @@
 use wasm_bindgen::prelude::*;
 
-use crate::Secp256k1Scalar;
-
 use crate::libs::jse::ojse;
 use crate::libs::jse::rjse;
+
+use crate::Secp256k1Scalar;
 
 use memory_wasm::Memory;
 
