@@ -15,6 +15,11 @@ pub struct Secp256k1VerifyingKey {
 #[wasm_bindgen]
 impl Secp256k1VerifyingKey {
     #[wasm_bindgen]
+    pub fn from_point(point: &Secp256k1ProjectivePoint) -> Result<Secp256k1VerifyingKey, JsError> {
+        Ok(Secp256k1VerifyingKey { inner: rjse!(k256::ecdsa::VerifyingKey::from_affine(point.inner.to_affine()))? })
+    }
+
+    #[wasm_bindgen]
     pub fn from_sec1_bytes(input: &Memory) -> Result<Secp256k1VerifyingKey, JsError> {
         Ok(Self { inner: rjse!(k256::ecdsa::VerifyingKey::from_sec1_bytes(&input.inner))? })
     }
@@ -27,11 +32,6 @@ impl Secp256k1VerifyingKey {
     #[wasm_bindgen]
     pub fn to_point(&self) -> Result<Secp256k1ProjectivePoint, JsError> {
         Ok(Secp256k1ProjectivePoint { inner: k256::ProjectivePoint::from(self.inner.as_affine()) })
-    }
-
-    #[wasm_bindgen]
-    pub fn from_point(point: &Secp256k1ProjectivePoint) -> Result<Secp256k1VerifyingKey, JsError> {
-        Ok(Secp256k1VerifyingKey { inner: rjse!(k256::ecdsa::VerifyingKey::from_affine(point.inner.to_affine()))? })
     }
 
     #[wasm_bindgen]
