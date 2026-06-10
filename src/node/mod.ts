@@ -1,2 +1,2 @@
-export * as secp256k1Wasm from "./mods/mod.ts";
+export * from "./mods/mod.ts";
 
